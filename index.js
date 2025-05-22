@@ -9,6 +9,7 @@ connectDB();
 // Routes import
 import authRouter from './routes/auth.route.js';
 import bookRouter from './routes/book.routes.js';
+import reviewRouter from './routes/review.route.js';
 
 // Auth middleware
 import { auth } from './middlewares/auth.js';
@@ -26,10 +27,13 @@ app.get("/", auth, (req, res) => {
     res.json({msg: "API Served here!"});
 });
 
+
 app.use('/user/auth', authRouter);
 
-
 app.use('/books', bookRouter);
+
+app.use('/reviews', reviewRouter);
+
 
 app.listen(port, () => {
     console.log(`app is running on ${port}`);

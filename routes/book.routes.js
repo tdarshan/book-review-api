@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { auth } from '../middlewares/auth.js';
 import Book from '../models/Book.js';
 import User from '../models/User.js';
+import Review from '../models/Review.js';
 
 const bookRouter = Router();
 
@@ -75,9 +76,9 @@ bookRouter.get("/", async (req, res) => {
 
 });
 
-bookRouter.get("/:id", async (req, res) =>{
+bookRouter.get("/:id", async (req, res) => {
     const { id } = req.params;
-    const {page = 1, limit = 5} = req.query;
+    const { page = 1, limit = 5 } = req.query;
 
     try {
 
@@ -87,13 +88,54 @@ bookRouter.get("/:id", async (req, res) =>{
             return res.status(404).json({ message: 'Book not found' });
         }
 
-        res.status(200).json({book});
-        
+        res.status(200).json({ book });
+
     } catch (error) {
         console.log("Error ", error);
-        res.status(500).json({msg: "Error fetching book!"});
+        res.status(500).json({ msg: "Error fetching book!" });
     }
 
+});
+
+bookRouter.post("/:id/reviews", auth, async (req, res) => {
+    const { id: bookId } = req.params;
+    const { description, rating } = req.body;
+    const userId = req.user.id;
+
+    try {
+
+        if (!rating || rating < 1 || rating > 5) {
+            return res.status(400).json({ message: 'Rating must be between 1 and 5' });
+        }
+
+        const book = await Book.findById(bookId);
+        if (!book) {
+            res.status(404).json({ msg: "Book not found" });
+        }
+
+        const existing = await Review.findOne({ bookId, reviewer: userId });
+        if (existing) {
+            res.status(400).json({ msg: "You've already reviewed this book!" });
+        }
+
+        const review = new Review({
+            bookId,
+            reviewer: userId,
+            description,
+            rating,
+        });
+
+        await review.save();
+
+        book.reviews.push(review._id);
+        await book.save();
+
+        res.status(200).json({ msg: "Review saved!", review });
+
+    } catch (error) {
+        console.log("Error ", error);
+        res.status(500).json({ msg: "Some error occurred!", error });
+    }
 });
 
 export default bookRouter;
