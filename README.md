@@ -1,6 +1,10 @@
 Schema : Refer added File in root : 'Schema-BooksAPI.png'
 <img src="./Schema-BooksAPI.png" />
 
+
+Postman Collection - Refer added file in root : 'BookAPI.postman_collection.json'
+<a href="./BookAPI.postman_collection.json">Postman Collection</a>
+
 ---API Endpoints---
 
 User Router : 

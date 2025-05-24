@@ -1,0 +1,283 @@
+{
+	"info": {
+		"_postman_id": "11485dc9-1f75-4b5f-884c-83484c272158",
+		"name": "BookAPI-Billeasy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23119097"
+	},
+	"item": [
+		{
+			"name": "Register User",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"test_user\",\n    \"email\": \"test-user@mail.com\",\n    \"password\": \"123456\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/user/auth/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"auth",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login User",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"test_user\",\n    \"email\": \"test-user@mail.com\",\n    \"password\": \"123456\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/user/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Book",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Baerer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MmY3YWVjYjRkNWY3OWM3ZGU3NDliOCIsInVzZXJuYW1lIjoidGRhcnNoYW4iLCJlbWFpbCI6InRkYXJzaGFuQGdtYWlsLmNvbSIsImlhdCI6MTc0ODA4MTM3MiwiZXhwIjoxNzQ4MTY3NzcyfQ.Tb0UQDXf99NdHyAD6qiEyGkzY5eO9xVYKsomoaU9DGA",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"An Forgotton Ancient University - Vallbhi\",\n    \"genre\": [\"History\", \"Historical Fiction Novel\", \"History and Archaeology\"]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/books/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"books",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Books",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/books/?&page=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"books",
+						""
+					],
+					"query": [
+						{
+							"key": null,
+							"value": null
+						},
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Book",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/books/68319bd7f570f2b9545fab58/?page=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"books",
+						"68319bd7f570f2b9545fab58",
+						""
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Review",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Baerer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MzFjNGE3NzgyMmIxMDNiM2Q5ZGJiNyIsInVzZXJuYW1lIjoidGVzdF91c2VyIiwiZW1haWwiOiJ0ZXN0LXVzZXJAbWFpbC5jb20iLCJpYXQiOjE3NDgwOTIwODAsImV4cCI6MTc0ODE3ODQ4MH0.ocYIcwKat4MIUXnOA7LxXhI2wxqg_iduuc2aNC1fzv4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"description\": \"Wants to travel to the city after reading this book!\",\n    \"rating\": 4\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/books/68319bd7f570f2b9545fab58/reviews",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"books",
+						"68319bd7f570f2b9545fab58",
+						"reviews"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Review",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Baerer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MmY4ZWFjNzVlYzZmYzBmN2UwNTliZiIsInVzZXJuYW1lIjoiYW1pdGF2X2dob3NoIiwiZW1haWwiOiJnYW1pdGF2QG1haWwuY29tIiwiaWF0IjoxNzQ3OTQ3MTg5LCJleHAiOjE3NDgwMzM1ODl9.bg8KST7LEL7QkTJ8Ay6k5mclsE2IrN-NFeW4XekBJfY",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"description\": \"nice two\",\n    \"rating\": 3\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/reviews/682facbd6729f28446ef0b5f",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"reviews",
+						"682facbd6729f28446ef0b5f"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Book/Author",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/search/?query=tdarsh",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"search",
+						""
+					],
+					"query": [
+						{
+							"key": "query",
+							"value": "tdarsh"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
