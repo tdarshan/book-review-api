@@ -8,7 +8,7 @@ const bookRouter = Router();
 
 bookRouter.post("/", auth, async (req, res) => {
     const { name, genre } = req.body;
-    console.log("user", req.user);
+    // console.log("user", req.user);
 
 
     if (!name || !genre || !Array.isArray(genre)) {
@@ -82,16 +82,30 @@ bookRouter.get("/:id", async (req, res) => {
 
     try {
 
-        const book = await Book.findById(id).populate('author', 'username email');
+        const book = await Book.findById(id)
+            .populate('author', ['username', 'email']);
+            // .populate('reviews', ['rating', 'description']);
 
         if (!book) {
             return res.status(404).json({ message: 'Book not found' });
         }
 
-        res.status(200).json({ book });
+        const reviews = await Review.find({bookId: book._id})
+                                    .populate('reviewer', 'username')
+                                    .sort({updatedAt: -1})
+                                    .skip((page-1)*limit)
+                                    .limit(parseInt(limit));
+                                    
+        const allReviews = await Review.find({bookId: book._id});
+        let sumRating = allReviews.reduce((total, review) => {
+            return total + review.rating
+        }, 0);
+        let rating = (sumRating/(allReviews.length)).toFixed(2);
+
+        res.status(200).json({ book, rating, reviews });
 
     } catch (error) {
-        console.log("Error ", error);
+        console.log("Error! ", error);
         res.status(500).json({ msg: "Error fetching book!" });
     }
 
