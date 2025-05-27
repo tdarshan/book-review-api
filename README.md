@@ -6,7 +6,7 @@ Postman Collection - Refer added file in root : 'BookAPI.postman_collection.json
 <a href="./BookAPI.postman_collection.json">Postman Collection</a>
 
 ---API Endpoints---
-
+<pre>
 User Router : 
 
 Register
@@ -108,3 +108,4 @@ query - if empty then redirects to - GET '/books'
 response: {
     [Books]
 }
+</pre>
